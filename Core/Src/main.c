@@ -22,6 +22,7 @@
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
 #include <string.h>
+#include <stdbool.h>
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -45,6 +46,7 @@ UART_HandleTypeDef huart2;
 
 /* USER CODE BEGIN PV */
 uint32_t x = 0 ;
+bool it = false ;
 /* USER CODE END PV */
 
 /* Private function prototypes -----------------------------------------------*/
@@ -99,6 +101,11 @@ int main(void)
   /* USER CODE BEGIN WHILE */
   while (1)
   {
+	  if ( it == true )
+	  {
+		  HAL_Delay ( 5000 ) ;
+		  it = false ;
+	  }
 	  HAL_PWR_EnterSTOPMode ( PWR_MAINREGULATOR_ON , PWR_STOPENTRY_WFI ) ;
     /* USER CODE END WHILE */
 
@@ -256,7 +263,8 @@ void HAL_GPIO_EXTI_Falling_Callback ( uint16_t GPIO_Pin )
 	{
 		x++ ;
 		HAL_GPIO_TogglePin ( LDG_GPIO_Port , LDG_Pin ) ;
-		send_debug_logs ( &x ) ;
+		send_debug_logs ( (char*) &x ) ;
+		it = true ;
 	}
 }
 /* USER CODE END 4 */
