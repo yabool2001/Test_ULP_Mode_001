@@ -103,10 +103,12 @@ int main(void)
   {
 	  if ( it == true )
 	  {
-		  HAL_Delay ( 5000 ) ;
+		  HAL_Delay ( 10000 ) ;
 		  it = false ;
 	  }
-	  HAL_PWR_EnterSTOPMode ( PWR_MAINREGULATOR_ON , PWR_STOPENTRY_WFI ) ;
+	  //HAL_PWR_EnterSTOPMode ( PWR_MAINREGULATOR_ON , PWR_STOPENTRY_WFI ) ;
+	  HAL_PWR_EnterSTOPMode ( PWR_LOWPOWERREGULATOR_ON , PWR_STOPENTRY_WFE ) ;
+
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */
